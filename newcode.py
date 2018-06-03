@@ -410,7 +410,7 @@ class Solution:
     # 这里要特别注意~找到任意重复的一个值并赋值到duplication[0]
     # 函数返回True/False
     def duplicate(self, numbers, duplication):
-        write code here
+        # write code here
         d = {}
         for n in numbers:
             d[n] = d.get(n, 0) + 1
@@ -420,8 +420,47 @@ class Solution:
 
         return False
 
+    def NumberOf1Between1AndN_Solution(self, n):
+        # write code here
+        # count = 0
+        # i = 1
+        # while n // i != 0:
+        #     current = (n // i) % 10  # 当前位
+        #     before = n // (i * 10)  # 前一位
+        #     after = n - (n // i) * i  # 低一位
+
+        #     if current == 0:
+        #         count += before * i
+
+        #     elif current == 1:
+        #         count += before * i + after + 1
+
+        #     else:
+        #         count += (before + 1) * i
+
+        #     i *= 10
+
+        # return count
+        count = 0
+        i = 1
+        while n // i != 0:
+            j = i * 10
+            count += i * (n // j)
+
+            k = n % j
+            if k > (2 * i - 1):
+                count += i
+            elif k < i:
+                count += 0
+            else:
+                count += k - i + 1
+
+            i = j
+
+        return count
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.duplicate([2, 1, 3, 1, 4], [-1])
+    r = s.NumberOf1Between1AndN_Solution(13)
     print(r)
