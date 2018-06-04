@@ -459,8 +459,25 @@ class Solution:
 
         return count
 
+    def Add(self, num1, num2):
+        # write code here
+        # a = num1 ^ num2
+        # b = (num1 & num2) << 1
+
+        # while b != 0:
+        #     a, b = a ^ b, (a & b) << 1
+
+        # return a
+
+        while num2 != 0:
+            a = num1 & num2
+            num1 = (num1 ^ num2) % 0x100000000  # 负数情况
+            num2 = (a << 1) % 0x100000000  # 负数情况
+
+        return num1 if num1 <= 0x7FFFFFFF else num1 | (~0x100000000 + 1)
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.NumberOf1Between1AndN_Solution(13)
+    r = s.Add(-2, 2)
     print(r)
