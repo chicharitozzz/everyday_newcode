@@ -476,6 +476,33 @@ class Solution:
 
         return num1 if num1 <= 0x7FFFFFFF else num1 | (~0x100000000 + 1)
 
+    def TreeDepth(self, pRoot):
+        # write code here
+        # if not pRoot:
+        #     return 0
+
+        # max_height = 0
+        # if pRoot.left:
+        #     height = 1 + self.TreeDepth(pRoot.left)
+        #     if height > max_height:
+        #         max_height = height
+
+        # if pRoot.right:
+        #     height = 1 + self.TreeDepth(pRoot.right)
+        #     if height > max_height:
+        #         max_height = height
+
+        # if not pRoot.left and not pRoot.right:
+        #     height = 1
+        #     if height > max_height:
+        #         max_height = height
+
+        # return max_height
+        if not pRoot:
+            return 0
+
+        return max(1 + self.TreeDepth(pRoot.left), 1 + self.TreeDepth(pRoot.right))
+
 
 if __name__ == '__main__':
     s = Solution()
