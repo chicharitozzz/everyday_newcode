@@ -503,8 +503,39 @@ class Solution:
 
         return max(1 + self.TreeDepth(pRoot.left), 1 + self.TreeDepth(pRoot.right))
 
+    def multiply(self, A):
+        # write code here
+        # B = []
+        # length = len(A)
+
+        # for i in range(length):
+        #     mul = 1
+        #     j = 0
+        #     while j < length:
+        #         if j != i:
+        #             mul *= A[j]
+        #         if mul == 0:
+        #             break
+        #         j += 1
+
+        #     B.append(mul)
+
+        # return B
+        length = len(A)
+        B = [1 for _ in range(length)]
+
+        for i in range(1, length):
+            B[i] = B[i - 1] * A[i - 1]
+
+        tmp = 1
+        for i in range(length - 2, -1, -1):
+            tmp *= A[i + 1]
+            B[i] *= tmp
+
+        return B
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.Add(-2, 2)
+    r = s.multiply([2, 3, 4, 5, -4])
     print(r)
