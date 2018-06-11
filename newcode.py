@@ -534,8 +534,62 @@ class Solution:
 
         return B
 
+    def Permutation(self, ss):
+        # write code here
+        res = []
+        s_list = list(ss)
+
+        def recur(s_list, tmp_str, res):
+            if not s_list:
+                res.append(tmp_str)
+
+            else:
+                for i in range(len(s_list)):
+                    recur(s_list[:i] + s_list[i + 1:],
+                          tmp_str + s_list[i], res)
+
+        if not ss:
+            return res
+
+        recur(s_list, '', res)
+
+        new_res = []
+        for r in res:
+            if r not in new_res:
+                new_res.append(r)
+
+        return new_res
+
+    def StrToInt(self, s):
+        import string
+        # write code here
+        flag = True
+        if not s:
+            return 0
+
+        if s[0] == '+':
+            s = s[1:]
+
+        elif s[0] == '-':
+            flag = False
+            s = s[1:]
+
+        li = []
+        for n in s:
+            if n not in string.digits:
+                return 0
+            else:
+                li.append(int(n))
+
+        li = li[::-1]
+        length = len(li)
+        for i in range(length):
+            li[i] *= 10 ** i
+
+        return sum(li) if flag == True else -sum(li)
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.multiply([2, 3, 4, 5, -4])
+    r = s.StrToInt('')
     print(r)
