@@ -588,8 +588,74 @@ class Solution:
 
         return sum(li) if flag == True else -sum(li)
 
+    def GetLeastNumbers_Solution(self, tinput, k):
+        # write code here
+        length = len(tinput)
+        if k < 0 or k > length:
+            return []
+
+        for i in range(k):
+            min_index = i
+            for j in range(i + 1, length):
+                if tinput[j] < tinput[min_index]:
+                    min_index = j
+
+            tinput[i], tinput[min_index] = tinput[min_index], tinput[i]
+
+        return tinput[:k]
+
+    def GetNumberOfK(self, data, k):
+        # write code here
+        left = 0
+        right = len(data) - 1
+
+        def get_last_k_index(left, right, data, k):
+            length = len(data)
+            while left <= right:
+                mid = left + right >> 1
+                if data[mid] > k:
+                    right = mid - 1
+
+                elif data[mid] < k:
+                    left = mid + 1
+
+                elif mid + 1 < length and data[mid + 1] == k:
+                    left = mid + 1
+
+                else:
+                    return mid
+
+            return -1
+
+        def get_first_k_index(left, right, data, k):
+            length = len(data)
+            while left <= right:
+                mid = left + right >> 1
+                if data[mid] > k:
+                    right = mid - 1
+
+                elif data[mid] < k:
+                    left = mid + 1
+
+                elif mid - 1 >= 0 and data[mid - 1] == k:
+                    right = mid - 1
+
+                else:
+                    return mid
+
+            return -1
+
+        l_id = get_first_k_index(left, right, data, k)
+
+        if l_id == -1:
+            return 0
+
+        r_id = get_last_k_index(left, right, data, k)
+
+        return r_id - l_id + 1
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.StrToInt('')
+    r = s.GetNumberOfK([3, 3, 3, 3], 3)
     print(r)
