@@ -654,8 +654,54 @@ class Solution:
 
         return r_id - l_id + 1
 
+    def PrintMinNumber(self, numbers):
+        # write code here
+        # numbers = list(map(str, numbers))
+
+        # def recur(numbers, s, res):
+        #     if not numbers:
+        #         res.append(s)
+
+        #     else:
+        #         for i in range(len(numbers)):
+        #             recur(numbers[:i] + numbers[i + 1:], s + numbers[i], res)
+
+        # if not numbers:
+        #     return ""
+
+        # else:
+        #     res = []
+        #     recur(numbers, '', res)  # 全排列
+
+        # min_num = float('inf')
+        # for r in res:
+        #     if r[0] != '0' and int(r) < min_num:  # 有0的情况
+        #         min_num = int(r)
+
+        # return min_num
+
+        # 输入数组为正整数数组
+        if not numbers:
+            return ""
+
+        numbers = list(map(str, numbers))
+        length = len(numbers)
+        # 插排
+        for i in range(1, length):
+            j = i - 1
+            tmp = numbers[i]
+
+            while j >= 0 and numbers[j] + numbers[i] > numbers[i] + numbers[j]:
+                j -= 1
+
+            # 移位
+            numbers[j + 2:i + 1] = numbers[j + 1:i]
+            numbers[j + 1] = tmp
+
+        return "".join(numbers)
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.GetNumberOfK([3, 3, 3, 3], 3)
+    r = s.PrintMinNumber([3, 32, 321])
     print(r)
