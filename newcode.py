@@ -700,8 +700,33 @@ class Solution:
 
         return "".join(numbers)
 
+    def printMatrix(self, matrix):
+        # write code here
+        res = []
+
+        def rotate(matrix):
+            """逆时针旋转90"""
+            row = len(matrix)
+            col = len(matrix[0])
+            new_mat = []
+            for i in range(col-1,-1,-1):
+                tmp_mat = []
+                for j in range(row):
+                    tmp_mat.append(matrix[j][i])
+                new_mat.append(tmp_mat)
+
+            return new_mat
+
+        while matrix:
+            res += matrix.pop(0)
+            if not matrix:
+                break
+            matrix = rotate(matrix)
+
+        return res
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.PrintMinNumber([3, 32, 321])
+    r = s.printMatrix([[1, 2, 3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
     print(r)
