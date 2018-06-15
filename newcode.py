@@ -709,7 +709,7 @@ class Solution:
             row = len(matrix)
             col = len(matrix[0])
             new_mat = []
-            for i in range(col-1,-1,-1):
+            for i in range(col - 1, -1, -1):
                 tmp_mat = []
                 for j in range(row):
                     tmp_mat.append(matrix[j][i])
@@ -725,8 +725,22 @@ class Solution:
 
         return res
 
+    def NumberOf1(self, n):
+        # write code here
+        count = 0
+        if n < 0:
+            n += 2**32
+
+        while n:
+            if n & 1:
+                count += 1
+
+            n >>= 1
+
+        return count
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.printMatrix([[1, 2, 3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]])
+    r = s.NumberOf1(-6)
     print(r)
