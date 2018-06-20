@@ -37,8 +37,33 @@ class Solution:
 
         return merge_list
 
+    def FindGreatestSumOfSubArray(self, array):
+        # write code here
+        length = len(array)
+
+        max_sum = float('-inf')
+        # for j in range(length):
+        #     tmp = 0
+        #     for k in range(j, length):
+        #         tmp += array[k]
+        #         if tmp > max_sum:
+        #             max_sum = tmp
+
+        cur_sum = 0
+        for i in range(length):
+            if cur_sum <= 0:
+                cur_sum = array[i]
+
+            else:
+                cur_sum += array[i]
+
+            if cur_sum > max_sum:
+                max_sum = cur_sum
+
+        return max_sum
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.Merge([], [])
+    r = s.FindGreatestSumOfSubArray([-6, -3, -2, -7, -15, -1])
     print(r)
