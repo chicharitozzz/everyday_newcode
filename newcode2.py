@@ -62,8 +62,44 @@ class Solution:
 
         return max_sum
 
+    def isNumeric(self, s):
+        # write code here
+        if not s:
+            return False
+
+        import string
+        digs = string.digits
+
+        symbol, decimal, scientific = False, False, False
+        length = len(s)
+
+        for i in range(length):
+            if s[i] == 'e' or s[i] == 'E':
+                if i == length - 1:
+                    return False
+                elif scientific:
+                    return False
+                scientific = True
+
+            elif s[i] == '+' or s[i] == '-':
+                if symbol and s[i - 1] != 'e' and s[i - 1] != 'E':
+                    return False  # 正负号跟在e后
+                elif not symbol and i > 0 and s[i - 1] != 'e' and s[i - 1] != 'E':
+                    return False
+                symbol = True
+
+            elif s[i] == '.':
+                if scientific or decimal:
+                    return False
+                decimal = True
+
+            elif s[i] not in digs:
+                return False
+
+        return True
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.FindGreatestSumOfSubArray([-6, -3, -2, -7, -15, -1])
+    r = s.isNumeric('.12')
     print(r)
