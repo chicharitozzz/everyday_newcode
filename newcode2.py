@@ -2,6 +2,8 @@ class Solution:
     def __init__(self):
         self.stack1 = []
         self.stack2 = []
+        self.s = ''
+        self.d = {}
 
     def push(self, node):
         # write code here
@@ -98,8 +100,22 @@ class Solution:
 
         return True
 
+    def FirstAppearingOnce(self):
+        # write code here
+        for c in self.s:
+            if self.d[c] == 1:
+                return c
+
+        return '#'
+
+    def Insert(self, char):
+        # write code here
+        self.s += char
+        self.d[char] = self.d.get(char, 0) + 1
+
 
 if __name__ == '__main__':
     s = Solution()
-    r = s.isNumeric('.12')
+    s.Insert('g')
+    r = s.FirstAppearingOnce()
     print(r)
