@@ -113,9 +113,20 @@ class Solution:
         self.s += char
         self.d[char] = self.d.get(char, 0) + 1
 
+    def myPow(self, x, n):
+        if n == 0:
+            return 1
+
+        elif n < 0:
+            n = -n
+            x = 1 / x
+
+        return self.myPow(x * x, n // 2) if n % 2 == 0 else x * self.myPow(x * x, n // 2)
+
 
 if __name__ == '__main__':
     s = Solution()
-    s.Insert('g')
-    r = s.FirstAppearingOnce()
+    # s.Insert('g')
+    # r = s.FirstAppearingOnce()
+    r = s.myPow(2.0000, -2)
     print(r)
