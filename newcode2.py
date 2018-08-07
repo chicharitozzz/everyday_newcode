@@ -123,10 +123,48 @@ class Solution:
 
         return self.myPow(x * x, n // 2) if n % 2 == 0 else x * self.myPow(x * x, n // 2)
 
+    def trap(self, height):
+        """
+        :type height: List[int]
+        :rtype: int
+        遍历一遍找到最高点，然后从左右两边分别向最高点进发
+        """
+        length = len(height)
+
+        if length <= 2:
+            return 0
+
+        max_height = 0
+        ind = -1
+
+        for i in range(length):
+            if height[i] > max_height:
+                max_height = height[i]
+                ind = i
+
+        area, root = 0, height[0]
+
+        for i in range(ind):
+            if root <= height[i]:
+                root = height[i]
+
+            else:
+                area += (root - height[i])
+
+        root = height[length - 1]
+        for j in range(length - 1, ind, -1):
+            if root <= height[j]:
+                root = height[j]
+            else:
+                area += (root - height[j])
+
+        return area
+
 
 if __name__ == '__main__':
     s = Solution()
     # s.Insert('g')
     # r = s.FirstAppearingOnce()
-    r = s.myPow(2.0000, -2)
+    # r = s.myPow(2.0000, -2)
+    r = s.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
     print(r)
