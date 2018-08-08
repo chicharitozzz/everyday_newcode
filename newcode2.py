@@ -160,11 +160,33 @@ class Solution:
 
         return area
 
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        def s2n(string):
+            length = len(string)
+
+            n = 0
+
+            base = 1
+            for i in range(length - 1, -1, -1):
+                n += base * eval(string[i])
+                base *= 10
+            return n
+
+        n1, n2 = s2n(num1), s2n(num2)
+
+        return str(n1 * n2)
+
 
 if __name__ == '__main__':
     s = Solution()
     # s.Insert('g')
     # r = s.FirstAppearingOnce()
     # r = s.myPow(2.0000, -2)
-    r = s.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
+    # r = s.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
+    r = s.multiply('2', '3')
     print(r)
