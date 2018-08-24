@@ -181,6 +181,31 @@ class Solution:
 
         return str(n1 * n2)
 
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        sum_li = []
+
+        def recur(nums_li, tmp_li, sum_li):
+            if not nums_li:
+                sum_li.append(tmp_li)
+
+            else:
+                for i in range(len(nums_li)):
+                    a = tmp_li + [nums_li[i]]
+                    b = nums_li[:i] + nums_li[i + 1:]
+                    recur(b, a, sum_li)
+                    # recur(t_li, tmp_li, sum_li)
+
+        if not nums:
+            return []
+
+        recur(nums, [], sum_li)
+
+        return sum_li
+
 
 if __name__ == '__main__':
     s = Solution()
@@ -188,5 +213,6 @@ if __name__ == '__main__':
     # r = s.FirstAppearingOnce()
     # r = s.myPow(2.0000, -2)
     # r = s.trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
-    r = s.multiply('2', '3')
+    # r = s.multiply('2', '3')
+    r = s.permute([1, 2, 3])
     print(r)
